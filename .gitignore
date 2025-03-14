@@ -1,0 +1,38 @@
+# Ignore the build directory
+/target/
+
+# Ignore Cargo.lock (if this is a library, not an application)
+Cargo.lock
+
+# Ignore environment files
+.env
+
+# Ignore IDE-specific files
+.idea/
+.vscode/
+
+# Ignore OS-specific files
+.DS_Store
+
+# Ignore Cargo cache files
+**/*.rs.bk
+
+# Ignore the documentation directory
+/doc/
+
+# Ignore local Cargo settings
+/.cargo/
+
+# Ignore test data directory (if any)
+/test_data/
+
+# Ignore logs directory (if any)
+/logs/
+
+# Ignore generated files (if any)
+/generated/
+
+# Ignore CI/CD configuration files (if not needed)
+/.github/
+.gitlab-ci.yml
+.travis.yml
