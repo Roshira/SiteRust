@@ -1,27 +1,22 @@
-use axum::{
-    routing::get,
-    Router,
-};
+use axum::{routing::get, Router};
 use std::net::SocketAddr;
+use tower_http::services::ServeDir;
+
+mod handlers;
+mod models;
+mod services;
 
 #[tokio::main]
 async fn main() {
-    // Створюємо маршрутизатор
     let app = Router::new()
-        .route("/", get(handler));
+        .route("/api/crypto", get(handlers::get_crypto_data))
+        .nest("/static", ServeDir::new("static"));  // Обслуговування статичних файлів
 
-    // Вказуємо адресу для прослуховування
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
-    println!("Сервер запущено на http://{}", addr);
+    println!("Сайт запущено: http://{}", addr);
 
-    // Запускаємо сервер
     axum::Server::bind(&addr)
         .serve(app.into_make_service())
         .await
         .unwrap();
-}
-
-// Обробник для головної сторінки
-async fn handler() -> &'static str {
-    "Привіт, світ!"
 }
